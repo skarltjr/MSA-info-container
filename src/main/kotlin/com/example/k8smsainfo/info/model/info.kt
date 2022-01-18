@@ -8,8 +8,8 @@ import javax.persistence.Id
 class info(
     @field:Id
     @field:GeneratedValue
-    val id: Long?,
+    var id: Long?,
     val movieNumber: Int,
-    val title: String,
-    val content: String
+    var title: String,
+    var content: String
 )

@@ -1,6 +1,7 @@
 package com.example.k8smsainfo.info.service
 
 import com.example.k8smsainfo.info.model.info
+import com.example.k8smsainfo.info.model.request.UpdateRequest
 import com.example.k8smsainfo.info.model.request.infoRequest
 import com.example.k8smsainfo.info.model.response.infoResponse
 import com.example.k8smsainfo.info.repository.InfoRepository
@@ -33,5 +34,17 @@ class InfoService(private val infoRepository:InfoRepository)
 
     fun deleteInfo(movieNum: Int) {
         infoRepository.deleteByMovieNumber(movieNum)
+    }
+
+    fun updateInfo(movieNum: Int, req: UpdateRequest): Any? {
+        val info = infoRepository.findByMovieNumber(movieNum)
+        info.content = req.content
+        info.title = req.title
+        val savedInfo = infoRepository.save(info)
+        return infoResponse(
+            movieNumber = movieNum,
+            title = savedInfo.title,
+            content = savedInfo.content
+        )
     }
 }
