@@ -31,7 +31,7 @@ class InfoController(
         infoService.deleteInfo(movieNum)
     }
 
-    @PostMapping("/{movieNum}")
+    @PatchMapping("/{movieNum}")
     @ResponseStatus(HttpStatus.OK)
     fun updateInfo(@PathVariable movieNum: Int, @RequestBody req: UpdateRequest):ResponseEntity<Any> {
         val res = infoService.updateInfo(movieNum, req)
